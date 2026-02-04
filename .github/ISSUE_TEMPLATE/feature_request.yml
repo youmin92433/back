@@ -1,0 +1,166 @@
+name: 💡 Feature Request
+description: 새로운 기능이나 개선 사항을 제안합니다.
+title: "[Feature] "
+labels: ["enhancement", "feature-request"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 기능 요청서
+        > 새로운 기능이나 기존 기능의 개선 사항을 제안해주세요!
+        
+        ---
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: 📁 관련 모듈
+      description: 기능이 추가될 모듈을 선택해주세요.
+      options:
+        - main (메인/로그인/회원가입)
+        - community (커뮤니티/QnA)
+        - corporate (기업 마이페이지)
+        - enterprise (기업 지원자 관리)
+        - experience (체험 프로그램)
+        - mypage (개인 마이페이지)
+        - point (포인트 시스템)
+        - program (프로그램 등록)
+        - skill-log (스킬로그/대시보드)
+        - 신규 모듈
+        - 전체/공통
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: 🏷️ 기능 유형
+      description: 제안하는 기능의 유형을 선택해주세요.
+      options:
+        - 🆕 신규 기능
+        - ⬆️ 기존 기능 개선
+        - 🎨 UI/UX 개선
+        - ⚡ 성능 최적화
+        - ♿ 접근성 개선
+        - 🔧 개발 편의성 개선
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 📊 우선순위 (제안)
+      description: 기능의 중요도를 선택해주세요.
+      options:
+        - "🔴 높음 - 핵심 기능"
+        - "🟡 보통 - 유용한 기능"
+        - "🟢 낮음 - 있으면 좋은 기능"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 📝 기능 요약
+      description: 제안하는 기능을 한 줄로 요약해주세요.
+      placeholder: "스킬로그 작성 시 AI 자동 태그 추천 기능"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🤔 해결하려는 문제
+      description: 이 기능이 왜 필요한가요? 어떤 문제를 해결하나요?
+      placeholder: |
+        현재 스킬로그 작성 시 태그를 일일이 입력해야 하는데,
+        사용자들이 어떤 태그를 써야 할지 몰라서 태그 사용률이 낮습니다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 제안하는 해결책
+      description: 기능이 어떻게 동작하면 좋을지 상세히 설명해주세요.
+      placeholder: |
+        ### 동작 방식
+        1. 사용자가 스킬로그 내용을 작성하면
+        2. AI가 내용을 분석하여 관련 태그 3-5개를 추천
+        3. 사용자가 클릭으로 태그 선택 가능
+        
+        ### 기대 효과
+        - 태그 사용률 증가
+        - 검색 품질 향상
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 대안
+      description: 고려해본 다른 해결 방법이 있다면 알려주세요.
+      placeholder: |
+        - 미리 정의된 태그 목록에서 선택하는 방식
+        - 다른 사용자들이 많이 사용한 태그 추천
+    validations:
+      required: false
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: 👤 사용자 스토리
+      description: 어떤 사용자가 이 기능을 필요로 하나요?
+      value: |
+        **사용자 유형**: (예: 개인 회원 / 기업 회원 / 관리자)
+        
+        **As a** [사용자 유형],
+        **I want to** [원하는 것],
+        **So that** [이유/효과].
+    validations:
+      required: false
+
+  - type: textarea
+    id: mockup
+    attributes:
+      label: 🎨 UI/UX 참고
+      description: 참고할 디자인, 스크린샷, 와이어프레임 등을 첨부해주세요.
+      placeholder: |
+        - 스크린샷/와이어프레임 드래그 앤 드롭
+        - 또는 참고 사이트 URL
+    validations:
+      required: false
+
+  - type: textarea
+    id: technical-consideration
+    attributes:
+      label: ⚙️ 기술적 고려사항
+      description: 구현 시 고려해야 할 기술적 사항이 있다면 알려주세요.
+      placeholder: |
+        - OpenAI API 연동 필요
+        - 응답 시간 최적화 필요 (2초 이내)
+        - 캐싱 전략 고려
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: 📌 영향 범위
+      description: 이 기능이 영향을 미치는 영역을 선택해주세요.
+      options:
+        - label: "Backend (API/Service)"
+        - label: "Frontend (UI/UX)"
+        - label: "Database"
+        - label: "외부 API 연동"
+        - label: "문서/가이드 업데이트 필요"
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: ✋ 확인 사항
+      description: 제출 전 확인해주세요.
+      options:
+        - label: "유사한 기능 요청이 이미 있는지 검색했습니다."
+          required: true

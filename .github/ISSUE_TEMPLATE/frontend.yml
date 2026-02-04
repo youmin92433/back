@@ -1,0 +1,154 @@
+name: 🎨 Frontend 개발/수정
+description: 화면 UI/UX 개발 또는 수정 작업을 요청합니다.
+title: "[Frontend] "
+labels: ["frontend", "ui"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎨 Frontend 작업 요청서
+        > HTML/CSS/JavaScript 기반의 화면 개발 또는 수정 시 작성합니다.
+        
+        ---
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: 📁 대상 모듈
+      description: 작업 대상 모듈을 선택해주세요.
+      options:
+        - main (메인/로그인/회원가입)
+        - community (커뮤니티/QnA)
+        - corporate (기업 마이페이지)
+        - enterprise (기업 지원자 관리)
+        - experience (체험 프로그램)
+        - mypage (개인 마이페이지)
+        - point (포인트 시스템)
+        - program (프로그램 등록)
+        - skill-log (스킬로그/대시보드/챗봇)
+        - error-page (에러 페이지)
+        - common (공통 컴포넌트)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: work-type
+    attributes:
+      label: 🔧 작업 유형
+      description: 작업 유형을 선택해주세요.
+      options:
+        - 🆕 신규 페이지 개발
+        - ✏️ 기존 페이지 수정
+        - 🎯 UI 컴포넌트 개발
+        - 🐛 UI 버그 수정
+        - 📱 반응형 대응
+        - ♿ 접근성 개선
+    validations:
+      required: true
+
+  - type: input
+    id: page-name
+    attributes:
+      label: 📌 대상 파일/페이지
+      description: 작업 대상 HTML/JS/CSS 파일명 또는 페이지명을 입력해주세요.
+      placeholder: "예: skill-log/log-detail.html 또는 로그 상세 페이지"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 작업 개요
+      description: 구현해야 할 UI/UX의 목적과 상세 내용을 기술해주세요.
+      placeholder: |
+        ### 목적
+        - 스킬로그 상세 페이지에 댓글 수정 기능 추가
+        
+        ### 상세 내용
+        - 댓글 수정 버튼 클릭 시 인라인 에디터 활성화
+        - 취소/저장 버튼 표시
+        - 저장 시 API 호출 후 UI 업데이트
+    validations:
+      required: true
+
+  - type: textarea
+    id: ui-spec
+    attributes:
+      label: 🖼️ UI 명세
+      description: 화면 구성, 레이아웃, 인터랙션 등을 상세히 기술해주세요.
+      value: |
+        ### 레이아웃
+        - 
+        
+        ### 컴포넌트
+        - 
+        
+        ### 인터랙션
+        - 클릭 시:
+        - 호버 시:
+    validations:
+      required: false
+
+  - type: textarea
+    id: files-affected
+    attributes:
+      label: 📂 영향 받는 파일
+      description: 수정이 필요한 HTML/CSS/JS 파일을 나열해주세요.
+      placeholder: |
+        ### HTML
+        - templates/skill-log/log-detail.html
+        
+        ### CSS
+        - css/skill-log/log-detail.css
+        
+        ### JavaScript
+        - js/skill-log/log-detail.js
+    validations:
+      required: false
+
+  - type: input
+    id: api-endpoint
+    attributes:
+      label: 🔗 연동 API
+      description: 연동해야 할 백엔드 API가 있다면 입력해주세요.
+      placeholder: "PUT /api/v1/comments/{id}"
+    validations:
+      required: false
+
+  - type: textarea
+    id: design-link
+    attributes:
+      label: 🎯 디자인 참고
+      description: Figma, 스크린샷 등 디자인 참고 자료를 첨부해주세요.
+      placeholder: |
+        - Figma: https://www.figma.com/...
+        - 스크린샷: (이미지 드래그 앤 드롭)
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: browser-support
+    attributes:
+      label: 🌐 브라우저 지원
+      description: 지원해야 할 브라우저를 선택해주세요.
+      options:
+        - label: "Chrome (최신)"
+          required: true
+        - label: "Safari (최신)"
+        - label: "Firefox (최신)"
+        - label: "Edge (최신)"
+        - label: "모바일 브라우저"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ 완료 조건 (Definition of Done)
+      description: 작업 완료 시 체크해주세요.
+      options:
+        - label: "UI 구현 완료"
+        - label: "JavaScript 이벤트 핸들링 완료"
+        - label: "API 연동 완료"
+        - label: "반응형 대응 완료"
+        - label: "크로스 브라우저 테스트 완료"
+        - label: "코드 리뷰 완료"

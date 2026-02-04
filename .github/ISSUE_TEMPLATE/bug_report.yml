@@ -1,0 +1,146 @@
+name: 🐛 Bug Report
+description: 버그 또는 오류 사항을 리포트합니다.
+title: "[Bug] "
+labels: ["bug", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐛 버그 리포트
+        > 발견한 버그를 상세히 기술해주세요. 재현 가능할수록 빠른 수정이 가능합니다!
+        
+        ---
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: 📁 발생 모듈
+      description: 버그가 발생한 모듈을 선택해주세요.
+      options:
+        - main (메인/로그인/회원가입)
+        - community (커뮤니티/QnA)
+        - corporate (기업 마이페이지)
+        - enterprise (기업 지원자 관리)
+        - experience (체험 프로그램)
+        - mypage (개인 마이페이지)
+        - point (포인트 시스템)
+        - program (프로그램 등록)
+        - skill-log (스킬로그/대시보드)
+        - 기타
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: 🏷️ 버그 유형
+      description: 버그의 유형을 선택해주세요.
+      options:
+        - 🎨 UI/UX 오류
+        - ⚙️ 기능 오류
+        - 🔌 API 오류
+        - 💾 데이터 오류
+        - 🔒 보안 이슈
+        - ⚡ 성능 이슈
+        - 📱 반응형/호환성
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 심각도
+      description: 버그의 심각도를 선택해주세요.
+      options:
+        - "🔴 Critical - 서비스 이용 불가"
+        - "🟠 High - 주요 기능 오류"
+        - "🟡 Medium - 일부 기능 오류"
+        - "🟢 Low - 사소한 오류"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 버그 설명
+      description: 어떤 버그인지 간단히 설명해주세요.
+      placeholder: "로그인 후 마이페이지 접근 시 404 에러가 발생합니다."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 🔄 재현 방법
+      description: 버그를 재현하는 단계를 순서대로 작성해주세요.
+      placeholder: |
+        1. 로그인 페이지에서 로그인 진행
+        2. 상단 메뉴에서 '마이페이지' 클릭
+        3. 404 에러 페이지 표시
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ 기대 동작
+      description: 정상적으로 동작했을 때 어떻게 되어야 하나요?
+      placeholder: "마이페이지 화면이 정상적으로 표시되어야 합니다."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ 실제 동작
+      description: 실제로는 어떻게 동작하나요?
+      placeholder: "404 Not Found 에러 페이지가 표시됩니다."
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🖥️ 환경 정보
+      description: 버그가 발생한 환경 정보를 입력해주세요.
+      value: |
+        - **OS**: 
+        - **Browser**: 
+        - **Device**: Desktop / Mobile
+        - **환경**: Local / Dev / Staging / Production
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📋 에러 로그/스크린샷
+      description: 콘솔 에러, 서버 로그, 스크린샷 등을 첨부해주세요.
+      placeholder: |
+        ```
+        에러 로그를 여기에 붙여넣기
+        ```
+        
+        또는 스크린샷을 드래그 앤 드롭
+    validations:
+      required: false
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: 🔧 임시 해결책
+      description: 알고 있는 임시 해결 방법이 있다면 공유해주세요.
+      placeholder: "새로고침 후 다시 시도하면 가끔 동작합니다."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: ✋ 확인 사항
+      description: 제출 전 확인해주세요.
+      options:
+        - label: "동일한 버그가 이미 리포트되었는지 검색했습니다."
+          required: true
+        - label: "최신 버전에서 테스트했습니다."

@@ -1,0 +1,162 @@
+name: 💾 Database 작업
+description: 테이블 생성, 수정, 쿼리 최적화 등 데이터베이스 관련 작업을 요청합니다.
+title: "[DB] "
+labels: ["database", "backend"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 💾 Database 작업 요청서
+        > 테이블 설계, 스키마 변경, 쿼리 최적화 등 DB 관련 작업 시 작성합니다.
+        
+        ---
+
+  - type: dropdown
+    id: work-type
+    attributes:
+      label: 🔧 작업 유형
+      description: 작업 유형을 선택해주세요.
+      options:
+        - 🆕 테이블 신규 생성
+        - ✏️ 테이블 구조 변경 (ALTER)
+        - 🗑️ 테이블 삭제
+        - 📊 인덱스 추가/수정
+        - ⚡ 쿼리 최적화
+        - 📝 초기 데이터 삽입
+        - 🔄 데이터 마이그레이션
+    validations:
+      required: true
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: 📁 관련 모듈
+      description: 작업이 영향을 미치는 모듈을 선택해주세요.
+      options:
+        - member (회원)
+        - community (커뮤니티/QnA)
+        - corporate (기업)
+        - experience (체험 프로그램)
+        - skill-log (스킬로그)
+        - point (포인트)
+        - program (프로그램)
+        - notification (알림)
+        - common (공통)
+    validations:
+      required: true
+
+  - type: input
+    id: table-name
+    attributes:
+      label: 📌 테이블명
+      description: 작업 대상 테이블명을 입력해주세요.
+      placeholder: "tb_member_profile 또는 신규 테이블명"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 작업 설명
+      description: 작업의 목적과 내용을 상세히 설명해주세요.
+      placeholder: |
+        ### 목적
+        회원 프로필 이미지 저장을 위한 테이블 추가
+        
+        ### 상세 내용
+        - 프로필 이미지 URL 저장
+        - 이미지 업로드 이력 관리
+    validations:
+      required: true
+
+  - type: textarea
+    id: schema
+    attributes:
+      label: 📋 테이블 스키마
+      description: 테이블 구조를 정의해주세요.
+      value: |
+        ```sql
+        CREATE TABLE tb_example (
+            id          BIGINT       PRIMARY KEY AUTO_INCREMENT,
+            column1     VARCHAR(100) NOT NULL COMMENT '컬럼 설명',
+            column2     INT          DEFAULT 0 COMMENT '컬럼 설명',
+            created_at  DATETIME     DEFAULT CURRENT_TIMESTAMP,
+            updated_at  DATETIME     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            
+            INDEX idx_column1 (column1)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='테이블 설명';
+        ```
+    validations:
+      required: false
+
+  - type: textarea
+    id: erd
+    attributes:
+      label: 🔗 ERD / 관계 설명
+      description: 다른 테이블과의 관계를 설명하거나 ERD를 첨부해주세요.
+      placeholder: |
+        ### 연관 테이블
+        - tb_member (1:1) - member_id로 연결
+        - tb_file (1:N) - file_id로 연결
+        
+        ### ERD
+        (이미지 드래그 앤 드롭)
+    validations:
+      required: false
+
+  - type: textarea
+    id: migration
+    attributes:
+      label: 🔄 마이그레이션 쿼리
+      description: 실행할 DDL/DML 쿼리를 작성해주세요.
+      placeholder: |
+        ```sql
+        -- 컬럼 추가
+        ALTER TABLE tb_member 
+        ADD COLUMN profile_image VARCHAR(500) AFTER nickname;
+        
+        -- 기존 데이터 업데이트
+        UPDATE tb_member 
+        SET profile_image = '/default/profile.png' 
+        WHERE profile_image IS NULL;
+        ```
+    validations:
+      required: false
+
+  - type: textarea
+    id: rollback
+    attributes:
+      label: ⏪ 롤백 쿼리
+      description: 문제 발생 시 롤백할 쿼리를 작성해주세요.
+      placeholder: |
+        ```sql
+        ALTER TABLE tb_member DROP COLUMN profile_image;
+        ```
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: ⚠️ 영향도 체크
+      description: 작업의 영향도를 확인해주세요.
+      options:
+        - label: "서비스 중단 없이 적용 가능"
+        - label: "기존 데이터에 영향 없음"
+        - label: "관련 Entity/Repository 수정 필요"
+        - label: "관련 쿼리(MyBatis) 수정 필요"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ 완료 조건 (Definition of Done)
+      description: 작업 완료 시 체크해주세요.
+      options:
+        - label: "DDL 스크립트 작성 완료"
+        - label: "롤백 스크립트 준비"
+        - label: "Entity 클래스 수정"
+        - label: "Repository/Mapper 수정"
+        - label: "개발 DB 적용 완료"
+        - label: "테스트 완료"
+        - label: "코드 리뷰 완료"

@@ -1,0 +1,181 @@
+name: 🔌 API 개발/수정
+description: REST API 엔드포인트 개발 또는 수정 작업을 요청합니다.
+title: "[API] "
+labels: ["backend", "api"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🔌 API 작업 요청서
+        > REST API 엔드포인트를 신규 개발하거나 기존 API를 수정할 때 작성합니다.
+        
+        ---
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: 📁 대상 모듈
+      description: API가 속하는 모듈을 선택해주세요.
+      options:
+        - member (회원)
+        - auth (인증/인가)
+        - community (커뮤니티/QnA)
+        - corporate (기업)
+        - experience (체험 프로그램)
+        - skill-log (스킬로그)
+        - point (포인트)
+        - program (프로그램)
+        - notification (알림)
+        - common (공통)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: http-method
+    attributes:
+      label: 🔹 HTTP Method
+      description: API의 HTTP 메서드를 선택해주세요.
+      options:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+    validations:
+      required: true
+
+  - type: input
+    id: endpoint
+    attributes:
+      label: 🔗 API Endpoint
+      description: API 엔드포인트 경로를 입력해주세요.
+      placeholder: "/api/v1/members/{memberId}/profile"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 API 설명
+      description: API의 목적과 기능을 상세히 설명해주세요.
+      placeholder: |
+        ### 목적
+        회원의 프로필 정보를 수정하는 API
+        
+        ### 기능
+        - 닉네임, 프로필 이미지, 자기소개 수정
+        - 수정 완료 후 업데이트된 프로필 정보 반환
+    validations:
+      required: true
+
+  - type: textarea
+    id: request-spec
+    attributes:
+      label: 📥 Request 명세
+      description: Request Header, Path Variable, Query Parameter, Body 등을 정의해주세요.
+      value: |
+        ### Headers
+        ```
+        Authorization: Bearer {accessToken}
+        Content-Type: application/json
+        ```
+        
+        ### Path Variables
+        | Name | Type | Required | Description |
+        |------|------|----------|-------------|
+        | memberId | Long | ✅ | 회원 ID |
+        
+        ### Query Parameters
+        | Name | Type | Required | Description |
+        |------|------|----------|-------------|
+        | - | - | - | - |
+        
+        ### Request Body
+        ```json
+        {
+          "nickname": "string",
+          "introduction": "string"
+        }
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: response-spec
+    attributes:
+      label: 📤 Response 명세
+      description: 성공/실패 응답 형식을 정의해주세요.
+      value: |
+        ### 성공 응답 (200 OK)
+        ```json
+        {
+          "success": true,
+          "data": {
+            "memberId": 1,
+            "nickname": "홍길동",
+            "introduction": "안녕하세요!"
+          },
+          "message": null
+        }
+        ```
+        
+        ### 에러 응답
+        | Status | Code | Message |
+        |--------|------|---------|
+        | 400 | INVALID_INPUT | 입력값이 올바르지 않습니다 |
+        | 401 | UNAUTHORIZED | 인증이 필요합니다 |
+        | 404 | MEMBER_NOT_FOUND | 회원을 찾을 수 없습니다 |
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: ✔️ Validation 규칙
+      description: 입력값 검증 규칙을 정의해주세요.
+      placeholder: |
+        - nickname: 2-20자, 특수문자 불가
+        - introduction: 최대 200자
+    validations:
+      required: false
+
+  - type: textarea
+    id: auth
+    attributes:
+      label: 🔒 인증/인가
+      description: 인증 및 권한 요구사항을 정의해주세요.
+      value: |
+        - [ ] 인증 필요 (JWT)
+        - [ ] 특정 권한 필요 (Role: )
+        - [ ] 본인 확인 필요
+        - [ ] 인증 불필요 (Public API)
+    validations:
+      required: false
+
+  - type: textarea
+    id: related-apis
+    attributes:
+      label: 🔄 연관 API
+      description: 관련된 다른 API가 있다면 나열해주세요.
+      placeholder: |
+        - GET /api/v1/members/{memberId}/profile (프로필 조회)
+        - POST /api/v1/upload/profile-image (이미지 업로드)
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ 완료 조건 (Definition of Done)
+      description: 작업 완료 시 체크해주세요.
+      options:
+        - label: "Controller 구현 완료"
+        - label: "Service 로직 구현 완료"
+        - label: "Request/Response DTO 정의"
+        - label: "Validation 적용"
+        - label: "예외 처리 구현"
+        - label: "Unit Test 작성"
+        - label: "Integration Test 작성"
+        - label: "Swagger 문서 작성"
+        - label: "코드 리뷰 완료"
