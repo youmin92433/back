@@ -1,5 +1,3 @@
-
-
 create table tbl_qna_job_category_small
 (
     id                      bigint unsigned auto_increment primary key comment '직무 카테고리 ID',
