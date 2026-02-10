@@ -7,8 +7,16 @@ import com.app.trycatch.dto.member.IndividualMemberDTO;
 import com.app.trycatch.dto.member.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Optional;
+
 @Mapper
 public interface MemberMapper {
+
+    //    아이디 검사
+    Optional<MemberVO> selectByMemberId(String memberId);
+    //    이메일 검사
+    Optional<MemberVO> selectByMemberEmail(String memberEmail);
+
     //    oauth
     public void insertOauth(OAuthVO oAuthVO);
 
