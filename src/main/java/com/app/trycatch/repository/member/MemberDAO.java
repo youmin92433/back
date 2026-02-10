@@ -2,15 +2,26 @@ package com.app.trycatch.repository.member;
 
 import com.app.trycatch.domain.member.MemberVO;
 import com.app.trycatch.domain.member.OAuthVO;
+import com.app.trycatch.dto.member.MemberDTO;
 import com.app.trycatch.mapper.member.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class MemberDAO {
     private final MemberMapper memberMapper;
 
+    //    아이디 검사
+    public Optional<MemberVO> findByMemberId(String memberId) {
+        return memberMapper.selectByMemberId(memberId);
+    }
+    //    이메일 검사
+    public Optional<MemberVO> findByMemberEmail(String memberEmail) {
+        return memberMapper.selectByMemberEmail(memberEmail);
+    }
     // 개인회원 가입
     public void saveIndividual(MemberVO memberVO) {
         memberMapper.insertIndividual(memberVO);
