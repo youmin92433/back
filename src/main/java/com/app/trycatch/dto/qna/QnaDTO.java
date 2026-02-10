@@ -16,6 +16,8 @@ public class QnaDTO {
     private String qnaContent;
     private int qnaViewCount;
     private QnaStatus qnaStatus;
+    private Long jobCategorySmallId;
+    private String jobCategoryName;
     private String individualMemberEducation;
     private int individualMemberPoint;
     private int individualMemberLevel;
@@ -30,6 +32,8 @@ public class QnaDTO {
                 .individualMemberId(individualMemberId)
                 .qnaTitle(qnaTitle)
                 .qnaContent(qnaContent)
+                .jobCategorySmallId(jobCategorySmallId)
+                .jobCategoryName(jobCategoryName)
                 .qnaViewCount(qnaViewCount)
                 .qnaStatus(qnaStatus)
                 .createdDatetime(createdDatetime)

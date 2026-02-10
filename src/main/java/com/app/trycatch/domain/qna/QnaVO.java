@@ -14,6 +14,8 @@ public class QnaVO extends Period {
     private Long id;
     private Long individualMemberId;
     private String qnaTitle;
+    private Long jobCategorySmallId;
+    private String jobCategoryName;
     private String qnaContent;
     private int qnaViewCount;
     private QnaStatus qnaStatus;
