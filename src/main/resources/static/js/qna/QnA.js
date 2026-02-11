@@ -135,7 +135,7 @@ reportSubmitButton.addEventListener("click", (e) => {
     );
     if (reportSubmitMessage) {
         alert("신고 처리 완료되었습니다.");
-        location.href = "../community/QnA.html";
+        location.href = "/QnA.html";
     }
 });
 
@@ -188,7 +188,7 @@ reportActiveButtons.forEach((btn, index) => {
             const deleteConfirm = confirm("정말 삭제하시겠습니까?");
             if (deleteConfirm) {
                 alert("삭제되었습니다.");
-                location.href = "../community/QnA.html";
+                location.href = "/QnA.html";
             }
         }
 

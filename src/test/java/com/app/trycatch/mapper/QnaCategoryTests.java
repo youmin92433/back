@@ -21,8 +21,11 @@ public class QnaCategoryTests {
     @Autowired
     private QnaJobCategoryMapper qnaJobCategoryMapper;
 
+
     @Test
     public void testSelectAll() {
-        qnaJobCategoryMapper.selectAll().forEach(System.out::println);
+//        qnaJobCategoryMapper.selectAll().forEach(System.out::println);
+        qnaJobCategoryMapper.selectAllBig().forEach(System.out::println);
+//        qnaJobCategoryMapper.selectAllSmall().forEach(System.out::println);
     }
 }
