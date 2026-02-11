@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public class QnaDAO {
     private final QnaMapper qnaMapper;
 
+//    작성
     public void save(QnaVO qnaVO) {
         qnaMapper.insert(qnaVO);
     }
