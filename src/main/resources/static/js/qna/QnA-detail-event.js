@@ -42,7 +42,7 @@ reportSubmitButton.addEventListener("click", (e) => {
     );
     if (reportSubmitMessage) {
         alert("신고 처리 완료되었습니다.");
-        location.href = "../community/QnA-detail.html";
+        location.href = "/QnA-detail.html";
     }
 });
 // 신고창 text-area 누를 시 문구 삭제
@@ -491,14 +491,14 @@ const replyOfReplySubmitButtons = document.querySelectorAll(
 // 대댓글 달기(로그인)
 replyOfReplySubmitButtons.forEach((replyOfReplySubmitButton) => {
     replyOfReplySubmitButton.addEventListener("click", (e) => {
-        location.href = "../community/QnA-detail.html";
+        location.href = "/QnA-detail.html";
     });
 });
 
 // 댓글 달기(로그인)
 replySubmitButton.addEventListener("click", (e) => {
     alert("댓글이 등록되었습니다.");
-    location.href = "../community/QnA-detail.html";
+    location.href = "/QnA-detail.html";
 });
 
 // 댓글 삭제(로그인)
@@ -516,7 +516,7 @@ deleteReplyOfButtons.forEach((deleteButton) => {
         if (isDelete) {
             // 사용자가 '확인'을 눌렀을 때만 실행
             alert("삭제되었습니다."); // (선택사항) 삭제 완료 알림
-            location.href = "../community/QnA-detail.html"; // 페이지 이동
+            location.href = "/QnA-detail.html"; // 페이지 이동
         } else {
             // 사용자가 '취소'를 누르면 아무 일도 일어나지 않음 (함수 종료)
             return;
@@ -531,7 +531,7 @@ deleteReplyButtons.forEach((deleteButton) => {
         if (isDelete) {
             // 사용자가 '확인'을 눌렀을 때만 실행
             alert("삭제되었습니다."); // (선택사항) 삭제 완료 알림
-            location.href = "../community/QnA-detail.html"; // 페이지 이동
+            location.href = "/QnA-detail.html"; // 페이지 이동
         } else {
             // 사용자가 '취소'를 누르면 아무 일도 일어나지 않음 (함수 종료)
             return;
@@ -647,7 +647,7 @@ const modifySubmitButtons = document.querySelectorAll(
 modifySubmitButtons.forEach((modifySubmitButton) => {
     modifySubmitButton.addEventListener("click", (e) => {
         alert("댓글 등록이 완료되었습니다.");
-        location.href = "../community/QnA-detail.html";
+        location.href = "/QnA-detail.html";
     });
 });
 
@@ -659,6 +659,6 @@ const comtModifySubmitButtons = document.querySelectorAll(
 comtModifySubmitButtons.forEach((comtModifySubmitButton) => {
     comtModifySubmitButton.addEventListener("click", (e) => {
         alert("댓글 등록이 완료되었습니다.");
-        location.href = "../community/QnA-detail.html";
+        location.href = "/QnA-detail.html";
     });
 });
