@@ -1,11 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(./gradlew compileJava:*)",
-      "Bash(./gradlew clean:*)",
-      "Bash(timeout:*)",
-      "Bash(findstr:*)",
-      "Bash(javap:*)"
+      "Bash(git -C \"C:\\\\gb_0900_ljs\\\\spring\\\\workspace\\\\trycatch\" status)"
     ]
   }
 }
