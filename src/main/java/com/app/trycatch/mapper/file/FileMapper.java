@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface FileMapper {
-    void insert(FileDTO fileDTO);
+    public void insert(FileDTO fileDTO);
 }
