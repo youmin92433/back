@@ -178,12 +178,59 @@ const corpInputDiv = document.querySelector(
 const corpInput = corpInputDiv.querySelector(
     ".schInp.devQnaWriteCompanyLayerSearchInput",
 );
-corpInput.addEventListener("input", (e) => {
-    corpInputDiv.classList.add("focus");
-    if (!corpInput.value) {
-        corpInputDiv.classList.remove("focus");
+const corpSearchDiv = corpInputDiv.querySelector(".devQnaWriteCompanyLayerSearchDiv");
+const corpSearchUl = corpSearchDiv.querySelector("ul");
+
+// 4개 높이(약 44px * 4 = 176px)로 스크롤 제한
+corpSearchUl.style.maxHeight = "176px";
+corpSearchUl.style.overflowY = "auto";
+
+corpInput.addEventListener("keyup", (e) => {
+    corpInputDiv.classList.toggle("focus", !!corpInput.value);
+
+    const keyword = corpInput.value.trim();
+    if (!keyword) {
+        corpSearchDiv.style.display = "none";
+        corpSearchUl.innerHTML = "";
+        return;
     }
+
+    fetch(`/qna/search-company?keyword=${encodeURIComponent(keyword)}`)
+        .then(res => res.json())
+        .then(data => {
+            corpSearchUl.innerHTML = "";
+            if (data.length === 0) {
+                corpSearchDiv.style.display = "none";
+                return;
+            }
+            data.forEach(corp => {
+                const rest = corp.corpName.replace(keyword, "");
+                const li = document.createElement("li");
+                li.classList.add("devQnaWriteCompanyRecentItem");
+                li.dataset.bizName = corp.corpName;
+                li.innerHTML = `
+                    <button type="button" class="qnaSpB">
+                        <span class="point">${keyword}</span><span>${rest}</span>
+                    </button>`;
+                li.querySelector("button").addEventListener("click", () => {
+                    selectCorpItem(corp.corpName);
+                });
+                corpSearchUl.appendChild(li);
+            });
+            corpSearchDiv.style.display = "block";
+        });
 });
+
+function selectCorpItem(corpName) {
+    if (corpTriggerBtn) corpTriggerBtn.textContent = corpName;
+    document.getElementById("hiddenCompanyName").value = corpName;
+    if (layerBoxCorp) layerBoxCorp.classList.remove("open");
+    if (corpCheckboxForQuick) corpCheckboxForQuick.checked = true;
+    if (corpTriggerBtn) corpTriggerBtn.classList.add("on");
+    corpSearchDiv.style.display = "none";
+    corpSearchUl.innerHTML = "";
+    corpInput.value = "";
+}
 // X 버튼(공용)
 const btnLayerCloses = document.querySelectorAll(".btn-layer-close.qnaSpB");
 // // 링크
@@ -620,6 +667,11 @@ layerBoxCancelButton.addEventListener("click", (e) => {
 });
 
 uniLabelTag.addEventListener("click", (e) => {
+    const item = e.target.closest(".devUnivItem");
+    if (item) {
+        const univName = item.dataset.univName;
+        document.getElementById("hiddenCollegeFriend").value = univName;
+    }
     layerBox.classList.remove("open");
 });
 
@@ -640,12 +692,16 @@ const corpCheckboxForQuick = document.getElementById("lb_targetCheck3");
 
 corpQuickSelectButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-        const corpName = btn.textContent.trim();
+        const item = btn.closest(".devQnaWriteCompanyRecentItem");
+        const corpName = item ? item.dataset.bizName : btn.textContent.trim();
 
         // 드롭다운 버튼 텍스트 변경
         if (corpTriggerBtn) {
             corpTriggerBtn.textContent = corpName;
         }
+
+        // hidden input 세팅
+        document.getElementById("hiddenCompanyName").value = corpName;
 
         // 모달 닫기
         if (layerBoxCorp) {
