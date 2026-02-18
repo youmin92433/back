@@ -662,6 +662,14 @@ em {
     word-break: break-all;
 }
 
+.viewContWrap .contBox .cont .image{
+    width: 100%;
+}
+.viewContWrap .contBox .cont .image img{
+    width: auto;
+    max-width: 100%;
+}
+
 .viewContWrap .contBox .btmArea {
     position: relative;
     margin-top: 28px;

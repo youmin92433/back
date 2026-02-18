@@ -3,7 +3,6 @@ package com.app.trycatch.mapper;
 import com.app.trycatch.common.pagination.Criteria;
 import com.app.trycatch.common.search.Search;
 import com.app.trycatch.dto.experience.ExperienceProgramDTO;
-import com.app.trycatch.mapper.experience.ExperienceProgramFileMapper;
 import com.app.trycatch.mapper.experience.ExperienceProgramMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -14,16 +13,14 @@ import java.util.List;
 
 @SpringBootTest
 @Slf4j
-public class ExperienceProgramFileTests {
-    @Autowired
-    private ExperienceProgramFileMapper experienceProgramFileMapper;
+public class ExperienceProgramMapperTests {
     @Autowired
     private ExperienceProgramMapper experienceProgramMapper;
 
     @Test
-    public void testSelectAllByExperienceProgramId() {
+    public void testSelectAllByChallengerMemberId() {
         Search search = new Search();
-        Long memberId = 9L;
+        Long memberId = 11L;
 
         search.setKeyword("");
 
@@ -33,10 +30,11 @@ public class ExperienceProgramFileTests {
         List<ExperienceProgramDTO> experiencePrograms =
                 experienceProgramMapper.selectAllByMemberIdOfChallenger(criteria, search, memberId);
 
-        experiencePrograms.forEach((experienceProgramDTO) -> {
-            log.info("{}", experienceProgramFileMapper.selectAllByExperienceProgramId(experienceProgramDTO.getId()));
-        });
+        experiencePrograms.forEach((experienceProgram) -> log.info("{}", experienceProgram));
     }
 
-
+    @Test
+    public void testSelectById() {
+        log.info("{}", experienceProgramMapper.selectById(1L).orElse(null));
+    }
 }

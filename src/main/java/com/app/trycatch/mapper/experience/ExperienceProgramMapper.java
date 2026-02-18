@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface ExperienceProgramMapper {
@@ -16,4 +17,7 @@ public interface ExperienceProgramMapper {
                                                              @Param("search") Search search, @Param("id") Long id);
 //    개수
     public int selectTotalByMemberIdOfChallenger(@Param("search") Search search, @Param("id") Long id);
+
+//    조회
+    public Optional<ExperienceProgramDTO> selectById(Long id);
 }

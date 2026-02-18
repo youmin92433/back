@@ -80,7 +80,7 @@ public class SkillLogController {
         }
 
         model.addAttribute("aside", skillLogService.aside(memberId));
-        model.addAttribute("skillLog", skillLogService.detail(id));
+        model.addAttribute("skillLog", skillLogService.detail(id, memberId));
         return "skill-log/detail";
     }
 }

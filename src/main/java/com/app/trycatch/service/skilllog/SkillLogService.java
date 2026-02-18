@@ -1,9 +1,11 @@
 package com.app.trycatch.service.skilllog;
 
 import com.app.trycatch.common.enumeration.file.FileContentType;
+import com.app.trycatch.common.exception.ExperienceProgramNotFoundException;
 import com.app.trycatch.common.exception.SkillLogNotFoundException;
 import com.app.trycatch.common.pagination.Criteria;
 import com.app.trycatch.common.search.Search;
+import com.app.trycatch.domain.skilllog.SkillLogLikeVO;
 import com.app.trycatch.domain.skilllog.TagVO;
 import com.app.trycatch.dto.experience.ExperienceProgramDTO;
 import com.app.trycatch.dto.experience.ExperienceProgramFileDTO;
@@ -14,6 +16,7 @@ import com.app.trycatch.repository.experience.ExperienceProgramFileDAO;
 import com.app.trycatch.repository.file.FileDAO;
 import com.app.trycatch.repository.skilllog.SkillLogDAO;
 import com.app.trycatch.repository.skilllog.SkillLogFileDAO;
+import com.app.trycatch.repository.skilllog.SkillLogLikeDAO;
 import com.app.trycatch.repository.skilllog.TagDAO;
 import com.app.trycatch.util.DateUtils;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +43,7 @@ public class SkillLogService {
     private final TagDAO tagDAO;
     private final SkillLogFileDAO skillLogFileDAO;
     private final FileDAO fileDAO;
+    private final SkillLogLikeDAO skillLogLikeDAO;
 
     private final ExperienceProgramDAO experienceProgramDAO;
     private final ExperienceProgramFileDAO experienceProgramFileDAO;
@@ -143,9 +147,14 @@ public class SkillLogService {
     }
 
 //    조회
-    public SkillLogDTO detail(Long id) {
+    public SkillLogDTO detail(Long id, Long memberId) {
         Optional<SkillLogDTO> foundSkillLog = null;
         SkillLogDTO skillLogDTO = null;
+        Optional<ExperienceProgramDTO> foundExperienceProgram = null;
+        ExperienceProgramDTO experienceProgramDTO = null;
+        SkillLogLikeDTO skillLogLikeDTO = new SkillLogLikeDTO();
+
+//        skillLog
         String formattedDate = null;
         boolean updateCheck = false;
 
@@ -162,10 +171,36 @@ public class SkillLogService {
                 .stream().map((tagVO) -> toTagDTO(tagVO)).collect(Collectors.toList()));
         skillLogDTO.setSkillLogFiles(skillLogFileDAO.findAllBySkillLogId(skillLogDTO.getId()));
 
+//        experienceProgram
+        if(skillLogDTO.getExperienceProgramId() != null){
+            foundExperienceProgram = experienceProgramDAO.findById(skillLogDTO.getExperienceProgramId());
+            experienceProgramDTO = foundExperienceProgram.orElseThrow(ExperienceProgramNotFoundException::new);
+            experienceProgramDTO.setExperienceProgramFiles(experienceProgramFileDAO.findAllByExperienceProgramId(skillLogDTO.getExperienceProgramId()));
+            skillLogDTO.setExperienceProgram(experienceProgramDTO);
+        }
 
+//        likes
+        skillLogLikeDTO.setSkillLogId(skillLogDTO.getId());
+        skillLogLikeDTO.setMemberId(memberId);
+        skillLogDTO.setLikeCount(skillLogLikeDAO.findCountBySkillLogId(skillLogDTO.getId()));
+        skillLogDTO.setLiked(skillLogLikeDAO.findBySkillLogIdAndMemberId(skillLogLikeDTO.toVO()).orElse(null) != null);
 
         return skillLogDTO;
     }
+
+//    좋아요
+    public int like(SkillLogLikeDTO skillLogLikeDTO) {
+        SkillLogLikeVO skillLogLikeVO = skillLogLikeDAO.findBySkillLogIdAndMemberId(skillLogLikeDTO.toVO()).orElse(null);
+
+        if(skillLogLikeVO != null){
+            skillLogLikeDAO.delete(skillLogLikeVO.getId());
+        } else {
+            skillLogLikeDAO.save(skillLogLikeDTO.toVO());
+        }
+
+        return skillLogLikeDAO.findCountBySkillLogId(skillLogLikeDTO.getSkillLogId());
+    }
+
 
     public TagDTO toTagDTO(TagVO tagVO) {
         TagDTO tagDTO = new TagDTO();

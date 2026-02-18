@@ -3,6 +3,7 @@ package com.app.trycatch.service;
 import com.app.trycatch.common.pagination.Criteria;
 import com.app.trycatch.common.search.Search;
 import com.app.trycatch.dto.skilllog.SkillLogDTO;
+import com.app.trycatch.dto.skilllog.SkillLogLikeDTO;
 import com.app.trycatch.dto.skilllog.SkillLogWithPagingDTO;
 import com.app.trycatch.dto.skilllog.TagDTO;
 import com.app.trycatch.service.skilllog.SkillLogService;
@@ -83,7 +84,16 @@ public class SkillLogServiceTests {
 
     @Test
     public void testDetail() {
-        SkillLogDTO skillLogDTO = skillLogService.detail(30L);
+        SkillLogDTO skillLogDTO = skillLogService.detail(70L, 4L);
         log.info("{}", skillLogDTO);
+    }
+
+    @Test
+    public void testLike() {
+        SkillLogLikeDTO skillLogLikeDTO = new SkillLogLikeDTO();
+        skillLogLikeDTO.setSkillLogId(70L);
+        skillLogLikeDTO.setMemberId(11L);
+
+        skillLogService.like(skillLogLikeDTO);
     }
 }

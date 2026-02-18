@@ -142,7 +142,11 @@ const qstnLikeButton = document.querySelector(".devQstnLike");
 // 버튼 눌렀을 때 클래스 "on" 토글
 if (qstnLikeButton) {
     qstnLikeButton.addEventListener("click", (e) => {
-        qstnLikeButton.classList.toggle("on");
+        if(qstnLikeButton.classList.contains("on")){
+            qstnLikeButton.classList.remove("on");
+        } else {
+            qstnLikeButton.classList.add("on");
+        }
     });
 }
 

@@ -379,7 +379,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cont" th:text="*{skillLogContent}"></div>
+                                <div class="cont">
+                                    <div class="experience-program">
+                                        <a href="/Recruit/GI_Read/${gno}" target="_blank" class="attach-box">
+                                            <span class="thumb-img-area">
+                                                <img th:src="@{/api/files/display?filePath=*{experienceProgram.experienceProgramFiles[0].filePath}&fileName=*{experienceProgram.experienceProgramFiles[0].fileName}}"
+                                                     onerror="this.src='//img.jobkorea.co.kr/Images/Logo/200/l/o/logo_none_200.png'">
+                                            </span>
+                                            <div class="corp-info-area qnaSpA">
+                                                <p class="corp-name" th:text="*{experienceProgram.corpCompanyName}"></p>
+                                                <p class="content" th:text="*{experienceProgram.experienceProgramTitle}"></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="image" th:each="file: *{skillLogFiles}">
+                                        <img th:src="@{/api/files/display(filePath=${file.filePath}, fileName=${file.fileName})}"/>
+                                    </div>
+                                    <div class="text" th:text="*{skillLogContent}"></div>
+                                </div>
                                 <div class="btmArea">
                                     <div class="infoBx">
                                         <a
@@ -412,8 +429,9 @@
                                                 type="button"
                                                 class="icon-like qnaSpB devQstnLike"
                                                 data-qstn-no="128418"
+                                                th:classappend="*{liked} ? 'on'"
                                             >
-                                                좋아요<em>14</em>
+                                                좋아요<em th:text="*{likeCount}"></em>
                                             </button>
                                         </div>
                                         <div class="reaction-item has-toolip">
