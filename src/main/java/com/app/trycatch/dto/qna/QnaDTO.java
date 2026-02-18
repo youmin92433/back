@@ -23,6 +23,7 @@ public class QnaDTO {
     private int individualMemberLevel;
     private int individualMemberPostCount;
     private int individualMemberQuestionCount;
+    private int qnaLikeCount;
     private String createdDatetime;
     private String updatedDatetime;
 

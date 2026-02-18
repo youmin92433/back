@@ -103,26 +103,31 @@
                         </ul>
                     </div>
                     <!-- //로그인 시 사이드 네비게이션 -->
-                     <!-- <div class="myInfoSec">
-                <a href="" class="myInfo">
-                    [Dev] 프로필 랜덤 이미지 파일명 : random_1 ~ random_20, 이미지 없음 : random_default
-                    <span class="proThumb"><img onerror="this.src='https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_default.jpg'" src="https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_13.jpg" alt="프로필 이미지"></span>
-                    <dl class="infoBx">
-                        <dt class="qnaSpA"><span class="nickname">mento...</span> <span class="lvIcon">Lv.1</span></dt>
-                        <dd>
-                            <span>글 <b>0</b></span>
-                            <span>질문 <b>0</b></span>
-                            <span>답변 <b>0</b> (채택 <b>0</b>)</span>
-                        </dd>
-                    </dl>
-                </a>
-                <button type="button" class="myPoint devMainCouponButton">
-                    <span class="point qnaSpB">0</span><span class="btnCoupon qnaSpA">쿠폰교환</span>
-                </button>
-            </div> -->
-                    <!-- 로그인 시 사이드 네비게이션// -->
-                    <!-- //비로그인 시 사이드 네비게이션 -->
-                    <div class="myInfoSec logout">
+                    <!-- 로그인 시 사이드 네비게이션 -->
+                    <div class="myInfoSec" th:if="${loginMember != null}">
+                        <a href="" class="myInfo">
+                            <!-- [Dev] 프로필 랜덤 이미지 파일명 : random_1 ~ random_20, 이미지 없음 : random_default -->
+                            <span class="proThumb"><img
+                                    onerror="this.src='https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_default.jpg'"
+                                    src="https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_13.jpg"
+                                    alt="프로필 이미지"
+                            /></span>
+                            <dl class="infoBx">
+                                <dt class="qnaSpA"><span class="nickname" th:text="${loginMember?.memberName}">mento...</span> <span class="lvIcon">Lv.1</span></dt>
+                                <dd>
+                                    <span>글 <b>0</b></span>
+                                    <span>질문 <b>0</b></span>
+                                    <span>답변 <b>0</b> (채택 <b>0</b>)</span>
+                                </dd>
+                            </dl>
+                        </a>
+                        <button type="button" class="myPoint devMainCouponButton">
+                            <span class="point qnaSpB">0</span><span class="btnCoupon qnaSpA">쿠폰교환</span>
+                        </button>
+                    </div>
+                    <!-- //로그인 시 사이드 네비게이션 -->
+                    <!-- 비로그인 시 사이드 네비게이션 -->
+                    <div class="myInfoSec logout" th:unless="${loginMember != null}">
                         <a href="" class="myInfo devLoginLayer" devalert="0">
                             <span class="proThumb"
                                 ><img
@@ -135,6 +140,7 @@
                             </p>
                         </a>
                     </div>
+                    <!-- //비로그인 시 사이드 네비게이션 -->
                 </div>
                 <!-- 비로그인 시 사이드 네비게이션 -->
                 <div class="navi-list-area">
