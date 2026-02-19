@@ -382,8 +382,7 @@
                                 <div class="cont">
                                     <th:block th:if="${skillLog.experienceProgram != null}">
                                         <div class="experience-program">
-
-                                            <a href="/Recruit/GI_Read/${gno}" target="_blank" class="attach-box">
+                                            <a th:href="@{/Recruit/GI_Read/${gno}}" target="_blank" class="attach-box">
                                             <span class="thumb-img-area">
                                                 <img th:src="@{/api/files/display?filePath=*{experienceProgram.experienceProgramFiles[0].filePath}&fileName=*{experienceProgram.experienceProgramFiles[0].fileName}}"
                                                      onerror="this.src='//img.jobkorea.co.kr/Images/Logo/200/l/o/logo_none_200.png'">
@@ -395,7 +394,7 @@
                                             </a>
                                         </div>
                                     </th:block>
-                                    <th:block th:if="${skillLog.skillLogFiles.length > 0}">
+                                    <th:block th:if="${skillLog.skillLogFiles.size() > 0}">
                                         <div class="image" th:each="file: *{skillLogFiles}">
                                             <img th:src="@{/api/files/display(filePath=${file.filePath}, fileName=${file.fileName})}"/>
                                         </div>
@@ -434,6 +433,8 @@
                                                 type="button"
                                                 class="icon-like qnaSpB devQstnLike"
                                                 data-qstn-no="128418"
+                                                th:data-skill-log-id="*{id}"
+                                                th:data-member-id="${session.member} ? ${session.member.id}"
                                                 th:classappend="*{liked} ? 'on'"
                                             >
                                                 좋아요<em th:text="*{likeCount}"></em>
@@ -3882,6 +3883,8 @@
         </div>
         <footer th:replace="~{/qna/footer.html::footer}"></footer>
     </body>
+    <script src="/js/skill-log/detail/service.js"></script>
+    <script src="/js/skill-log/detail/layout.js"></script>
     <script src="/js/skill-log/detail/event.js"></script>
     <script src="/js/qna/header-event.js"></script>
     <script src="/js/qna/footer.js"></script>

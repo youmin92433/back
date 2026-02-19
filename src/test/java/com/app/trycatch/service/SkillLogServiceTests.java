@@ -94,6 +94,6 @@ public class SkillLogServiceTests {
         skillLogLikeDTO.setSkillLogId(70L);
         skillLogLikeDTO.setMemberId(11L);
 
-        skillLogService.like(skillLogLikeDTO);
+        log.info("{}", skillLogService.like(skillLogLikeDTO));
     }
 }
